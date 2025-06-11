@@ -1,0 +1,24 @@
+footer {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: rgb(83, 83, 83);
+  display: flex;
+  justify-content: center;
+  height: 60px;
+  font-size: 12px;
+  width: 100%;
+  background-color: rgb(200, 200, 200);
+}
+
+footer > div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-caracters {
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(113, 113, 113);
+  margin: 0px 3px;
+}

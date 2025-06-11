@@ -1,0 +1,27 @@
+header {
+  background-color: #ed181f;
+  height: 90px;
+}
+
+.global-header-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.header-logo-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 200px;
+  height: 100%;
+}
+.header-logo-box:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.header-logo-box > img {
+  width: 100%;
+}

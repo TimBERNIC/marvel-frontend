@@ -1,0 +1,21 @@
+body {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+.container {
+  /* border: solid 2px rgb(0, 0, 0); */
+  max-width: 1024px;
+  min-width: 300px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 34px;
+}
+
+h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}

@@ -1,0 +1,26 @@
+.welcome-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #ed181f;
+  position: absolute;
+  z-index: 5;
+}
+
+.global-welcome-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-title-box {
+  text-align: center;
+  width: 100%;
+  font-size: 150px;
+  color: white;
+  letter-spacing: -5px;
+  transform: scaleX(0.75);
+  text-shadow: 2px 2px 5px black;
+}
