@@ -1,15 +1,153 @@
-import Header from "../../components/header/Header";
+import { useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
-import marvelLogo from "../../assets/img/Marvel-logo.png";
+import { MdOutlineStar } from "react-icons/md";
+import "./Favorites.css";
+import axios from "axios";
+import Modal from "../../components/modal/Modal";
 
-const Favorites = ({ token }) => {
+const Favorites = ({
+  token,
+  setToken,
+  userId,
+  setUserId,
+  userName,
+  setUserName,
+  favoritesTab,
+  setFavoritesTab,
+}) => {
+  const [isLoading, setisLoading] = useState(true);
+  const [favoritesComicsDataTab, setfavoritesComicsDataTab] = useState([]);
+
+  // pour les Modal
+  const [isVisible, setIsVisible] = useState(false);
+  const [tempData, setTempData] = useState([]);
+
+  //  le UseEffect le plus dur de ma carrière de débutant 🥵🥵🥵🥵
+  useEffect(() => {
+    const fetchComicData = async () => {
+      try {
+        const fetchAllComicsData = favoritesTab.map((comic) =>
+          axios.get(
+            `https://site--marvelproject-backend--cp75xnbbqn97.code.run/comic/${comic.comicId}`
+          )
+        );
+
+        //Ok renvoie un tableau avec toutes les promises après await
+        const responses = await Promise.all(fetchAllComicsData);
+
+        // on map le tableau dans le set... Pfiouuuuu
+
+        setfavoritesComicsDataTab(
+          responses.map((response) => {
+            return response.data;
+          })
+        );
+
+        setisLoading(false);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    setisLoading(false);
+    fetchComicData();
+  }, [favoritesTab]);
+
   return (
     <>
-      <Header icon={marvelLogo} />
-      <Navbar token={token} />
-      <main>
-        <div className="container">CECI EST LA PAGE FAVORITE</div>
-      </main>
+      <Navbar
+        token={token}
+        setToken={setToken}
+        userId={userId}
+        setUserId={setUserId}
+        userName={userName}
+        setUserName={setUserName}
+      />
+
+      {isLoading ? (
+        <p>Chargement en cours...</p>
+      ) : (
+        <main>
+          <div className="container">
+            <div className="global-favorite-Box">
+              {!token && (
+                <div className="favorite-non-register-box">
+                  Veuillez vous connecter pour accéder aux page de favoris
+                </div>
+              )}
+              {token && (
+                <div className="favorites-box">
+                  <h1 className="favorite-title">
+                    <MdOutlineStar color="orange" />
+                    Bienvenue sur ta connection {userName}!
+                    <MdOutlineStar color="orange" />
+                  </h1>
+                  <p className="favorite-text">
+                    Voici tout tes favoris sélectionnés à ce jour
+                  </p>
+
+                  <div>
+                    <div className="global-comics-box">
+                      {favoritesComicsDataTab.map((comic, index) => {
+                        return (
+                          <div
+                            className="comic-box"
+                            key={index}
+                            onClick={() => {
+                              setIsVisible(!isVisible);
+                              setTempData({
+                                picture:
+                                  comic.thumbnail.path +
+                                  "." +
+                                  comic.thumbnail.extension,
+                                title: comic.title
+                                  ? comic.title
+                                  : "Unknown title",
+                                description: comic.description
+                                  ? comic.description
+                                  : "A superhero like no other, but to find out, read his adventures!!",
+                                comicId: comic._id,
+                              });
+                            }}>
+                            <div className="image-comic-box">
+                              <img
+                                src={
+                                  comic.thumbnail.path +
+                                  "." +
+                                  comic.thumbnail.extension
+                                }
+                                alt="image du comics "
+                              />
+                            </div>
+                            <div className="comics-details-box">
+                              <h3>
+                                {comic.title ? comic.title : "Unknown title"}
+                              </h3>
+                              <p className="comics-details-text-box">
+                                {comic.description
+                                  ? comic.description
+                                  : "A superhero like no other, but to find out, read his adventures!!"}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          <Modal
+            tempData={tempData}
+            isVisible={isVisible}
+            setIsVisible={setIsVisible}
+            token={token}
+            favoritesTab={favoritesTab}
+            setFavoritesTab={setFavoritesTab}
+          />
+        </main>
+      )}
     </>
   );
 };

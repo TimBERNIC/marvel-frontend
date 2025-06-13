@@ -1,20 +1,23 @@
 import "../Footer/Footer.css";
-
+import { useLocation } from "react-router-dom";
 const Footer = () => {
+  const location = useLocation();
   return (
-    <footer>
-      <div className="container">
-        This exercice was made with
-        <span className="footer-caracters"> React </span> by
-        <a href="https://github.com/TimBERNIC" className="footer-caracters">
-          TimBERNIC
-        </a>
-        with
-        <a href="https://www.lereacteur.io/" className="footer-caracters">
-          LE REACTEUR
-        </a>
-      </div>
-    </footer>
+    location.pathname !== "/" && (
+      <footer>
+        <div className="container">
+          This exercice was made with
+          <span className="footer-caracters"> React </span> by
+          <a href="https://github.com/TimBERNIC" className="footer-caracters">
+            TimBERNIC
+          </a>
+          with
+          <a href="https://www.lereacteur.io/" className="footer-caracters">
+            LE REACTEUR
+          </a>
+        </div>
+      </footer>
+    )
   );
 };
 

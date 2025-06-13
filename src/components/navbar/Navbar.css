@@ -1,6 +1,10 @@
 .global-navbar-box {
   background-color: #ed181f;
   width: 100%;
+  position: sticky;
+  top: 0;
+  border-bottom: #000000 solid 2px;
+  box-shadow: inset 0px -14px 34px -8px rgba(0, 0, 0, 0.81);
 }
 .navbar-box {
   display: flex;
@@ -44,7 +48,8 @@
 .signup-button:hover,
 .navbar-button:hover {
   background-color: white;
-  opacity: 0.9;
+  border: solid 2px rgb(57, 56, 56);
+  transition: 0.1s;
 }
 
 .signup-button {
@@ -54,7 +59,7 @@
   width: 50px;
   height: 50px;
   border-radius: 5px;
-  border: none;
+  border: solid 2px transparent;
   background: linear-gradient(145deg, #d7d7d7, #f5f5f5);
   box-shadow: inset 0 1px 1px #ffffffaa, inset 0 -2px 5px #000000,
     3px 3px 6px #670509;
@@ -66,10 +71,17 @@
   transition: all 0.15s ease-in-out;
   background-clip: padding-box;
 }
+
+.signup-button-disable {
+  width: 50px;
+  height: 50px;
+  color: transparent;
+}
 .navbar-button:active,
 .signup-button:active {
-  box-shadow: inset 0 3px 5px #aaa, inset 0 -1px 2px #ffffffaa;
+  box-shadow: inset 0 3px 5px #383838, inset 0 -1px 2px #ffffffaa;
   transform: translateY(2px);
+  border: none;
 }
 
 .clicked {

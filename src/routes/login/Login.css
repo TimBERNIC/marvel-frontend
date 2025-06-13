@@ -1,0 +1,24 @@
+.global-form-div {
+  margin: 10vh 20%;
+  border: solid 2px rgb(255, 255, 255);
+  height: 500px;
+  background-color: white;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: solid 2px rgb(0, 9, 179);
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+}
+
+.change-form-box {
+}

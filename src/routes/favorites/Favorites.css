@@ -1,0 +1,20 @@
+.favorite-Box,
+.favorite-text {
+  color: white;
+}
+
+.favorite-title {
+  text-align: center;
+  margin-top: 20px;
+}
+.favorite-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0 50px;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  text-shadow: 28px 14px 8px #333333;
+  -webkit-text-stroke: 1px black;
+}

@@ -1,11 +1,12 @@
 header {
   background-color: #ed181f;
-  height: 90px;
+  height: 120px;
+  box-shadow: inset 0px 11px 34px -8px rgba(0, 0, 0, 0.81);
 }
 
 .global-header-box {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
 }
@@ -14,7 +15,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 200px;
+  max-width: 150px;
   height: 100%;
 }
 .header-logo-box:hover {
@@ -24,4 +25,17 @@ header {
 
 .header-logo-box > img {
   width: 100%;
+}
+
+.input-box {
+  height: 30px;
+  width: 300px;
+}
+
+.input-home,
+.input-comics {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  font-size: 18px;
 }

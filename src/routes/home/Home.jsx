@@ -1,54 +1,87 @@
 import "./Home.css";
-import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
-import marvelLogo from "../../assets/img/Marvel-logo.png";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Pagination from "../../components/pagination/Pagination";
+import { useNavigate } from "react-router-dom";
 
-const Home = ({ token }) => {
+const Home = ({
+  token,
+  setToken,
+  searchingName,
+  setSearchingName,
+  userId,
+  setUserId,
+  userName,
+  setUserName,
+}) => {
   const [homeData, setHomeData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [limit, setlimit] = useState(100);
+  const [skip, setSkip] = useState(0);
 
-  console.log(homeData);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        let filter = "";
+
+        if (searchingName) {
+          filter += `?name=${searchingName}`;
+        }
+        if (limit) {
+          filter += searchingName ? `&limit=${limit}` : `?limit=${limit}`;
+        }
+        if (skip) {
+          filter += searchingName || limit ? `&skip=${skip}` : `?skip=${skip}`;
+        }
+
         const response = await axios.get(
-          "https://site--marvelproject-backend--cp75xnbbqn97.code.run/characters"
+          `https://site--marvelproject-backend--cp75xnbbqn97.code.run/characters${filter}`
         );
         setIsLoading(false);
-        setHomeData(response.data);
+        setHomeData(response.data.results);
       } catch (error) {
         console.log(error.response);
       }
     };
     fetchData();
-  }, []);
+  }, [searchingName, skip, limit]);
 
   return (
     <>
-      <Header icon={marvelLogo} />
-      <Navbar token={token} />
-
-      {isLoading ? (
-        <p>Chargement en cours...</p>
-      ) : (
-        <main>
+      <Navbar
+        token={token}
+        setToken={setToken}
+        userId={userId}
+        setUserId={setUserId}
+        userName={userName}
+        setUserName={setUserName}
+      />
+      <main>
+        {isLoading ? (
+          <p className="loading-box">Chargement en cours...</p>
+        ) : (
           <div className="container">
-            <div className="global-card-box">
-              <div className="title-box">
-                <h2>Bienvenue dans l'univers survitaminé de Marvel</h2>
-                <p>
+            <div className="global-home-box">
+              <div className="title-home-box">
+                <h1>Bienvenue dans l'univers survitaminé de Marvel</h1>
+                <h2>
                   Choississez une carte pour découvrir les pouvoirs légendaires
                   de vos héros favoris dans toutes leurs aventures !
-                </p>
+                </h2>
               </div>
               <div className="global-card-box">
                 {homeData.map((heroe, index) => {
                   return (
                     <div className="card-box" key={index}>
-                      <div className="image-card-box">
+                      <div
+                        className="image-card-box"
+                        onClick={() => {
+                          navigate(`/${heroe._id}/comics`);
+                        }}>
                         <img
                           src={
                             heroe.thumbnail.path +
@@ -70,10 +103,11 @@ const Home = ({ token }) => {
                   );
                 })}
               </div>
+              <Pagination skip={skip} setSkip={setSkip} homeData={homeData} />
             </div>
           </div>
-        </main>
-      )}
+        )}
+      </main>
     </>
   );
 };
