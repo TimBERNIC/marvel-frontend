@@ -20,6 +20,7 @@ const Navbar = ({
   return (
     <nav className="global-navbar-box">
       <div className="navbar-box container">
+        <div className="burger-box"></div>
         <section className="navbar-button-box">
           <div
             className="navbar-button"

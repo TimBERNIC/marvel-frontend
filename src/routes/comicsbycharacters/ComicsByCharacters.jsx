@@ -104,22 +104,27 @@ const ComicsByCharacters = ({
                   alt="avatar du héro"
                 />
                 {/* BUTTON FAVORI */}
-                {foundFavorite ? (
-                  <button
-                    className="favorite-button-star-captain-character"
-                    onClick={removeCharacterToFavorite}>
-                    <span className="metal-star-wrapper">
-                      <img src={etoileLogo} alt="" />
-                    </span>
-                  </button>
+
+                {token ? (
+                  foundFavorite ? (
+                    <button
+                      className="favorite-button-star-captain-character"
+                      onClick={removeCharacterToFavorite}>
+                      <span className="metal-star-wrapper">
+                        <img src={etoileLogo} alt="" />
+                      </span>
+                    </button>
+                  ) : (
+                    <button
+                      className="favorite-button-character "
+                      onClick={addCharacterToFavorite}>
+                      <p className="favorite-button-text">
+                        Cliquez pour ajouter en favoris
+                      </p>
+                    </button>
+                  )
                 ) : (
-                  <button
-                    className="favorite-button-character "
-                    onClick={addCharacterToFavorite}>
-                    <p className="favorite-button-text">
-                      Cliquez pour ajouter en favoris
-                    </p>
-                  </button>
+                  <p></p>
                 )}
               </div>
               <div className="heroe-presentation">

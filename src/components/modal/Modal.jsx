@@ -139,7 +139,10 @@ const Modal = ({
                   : `A super adventure where you can find your favorite heroes`}
               </p>
             </div>
-            {comicId &&
+            {/* BOUTON DE FAVORI */}
+
+            {token &&
+              comicId &&
               (foundFavoriteComic ? (
                 <button
                   className="favorite-button-star-captain"
@@ -158,7 +161,8 @@ const Modal = ({
                 </button>
               ))}
 
-            {characterId &&
+            {token &&
+              characterId &&
               (foundCharacterFavorite ? (
                 <button
                   className="favorite-button-star-captain"
