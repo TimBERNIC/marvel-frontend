@@ -21,7 +21,7 @@ const App = () => {
   const [searchingName, setSearchingName] = useState("");
   const [searchingTitle, setSearchingTitle] = useState("");
 
-  //Récupération des donénes utilisateur si token présent.
+  //Récupération des données utilisateur si token présent.
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,7 +46,7 @@ const App = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [userId, token, favoritesTab, userName]);
 
   return (
     <>
@@ -63,6 +63,7 @@ const App = () => {
           setUserId={setUserId}
           userName={userName}
           setUserName={setUserName}
+          setFavoritesTab={setFavoritesTab}
         />
         <Routes>
           <Route path="/" element={<Welcome />}></Route>

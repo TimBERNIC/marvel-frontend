@@ -11,7 +11,11 @@ body,
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  overflow-x: hidden;
+}
+
+.body-fix {
+  overflow: hidden;
+  height: 100vh;
 }
 
 html {

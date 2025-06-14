@@ -1,4 +1,6 @@
 header {
+  position: relative;
+  z-index: 100;
   background-color: #ed181f;
   height: 120px;
   box-shadow: inset 0px 11px 34px -8px rgba(0, 0, 0, 0.81);
@@ -38,4 +40,11 @@ header {
   height: 100%;
   border-radius: 5px;
   font-size: 18px;
+}
+
+.welcome-user-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 30px;
 }

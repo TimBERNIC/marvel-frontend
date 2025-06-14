@@ -3,7 +3,7 @@ import "./Welcome.css";
 import { useNavigate } from "react-router-dom";
 
 const Welcome = () => {
-  const title = "Enntrez dans l'univers";
+  const title = "Entrez dans l'univers";
   const title2 = "MARVEL";
 
   const [displayLetter, setDisplayLetter] = useState("");

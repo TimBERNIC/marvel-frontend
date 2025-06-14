@@ -19,7 +19,7 @@ const Login = ({ token, setToken, setUserId, setUserName }) => {
   const register = async () => {
     try {
       if (
-        password.length > 8 &&
+        password.length > 7 &&
         password === passwordConfirm &&
         name &&
         email &&
@@ -110,6 +110,7 @@ const Login = ({ token, setToken, setUserId, setUserName }) => {
                   onChange={(event) => {
                     setEmail(event.target.value);
                   }}
+                  placeholder="email"
                 />
                 <label htmlFor="password">Inscrit ton mot de passe</label>
                 <input
@@ -119,8 +120,9 @@ const Login = ({ token, setToken, setUserId, setUserName }) => {
                   onChange={(event) => {
                     setPassword(event.target.value);
                   }}
+                  placeholder="mot de passe"
                 />
-                <button>Connecte toi</button>
+                <button className="log-button">Connecte toi</button>
                 {passwordError && (
                   <p className="error-message">
                     Veuillez rentrer un email et un mot de passe valide
@@ -139,6 +141,7 @@ const Login = ({ token, setToken, setUserId, setUserName }) => {
                 onSubmit={(event) => {
                   event.preventDefault();
                   register();
+                  setToken(Cookies.get("marvelTok"));
                 }}>
                 <label htmlFor="name">Inscrit ton nom</label>
                 <input
@@ -188,7 +191,7 @@ const Login = ({ token, setToken, setUserId, setUserName }) => {
                     plus de 8 caractères identiques
                   </p>
                 )}
-                <button>Enregistre toi</button>
+                <button className="log-button">Enregistre toi</button>
                 <p
                   className="change-form-box"
                   onClick={() => {

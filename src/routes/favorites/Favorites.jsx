@@ -21,15 +21,12 @@ const Favorites = ({
     []
   );
 
-  console.log(favoritesTab);
-  console.log(favoritesComicsDataTab);
-  console.log(favoritesCharactersDataTab);
-
   // pour les Modal
   const [isVisible, setIsVisible] = useState(false);
   const [tempData, setTempData] = useState([]);
 
-  //  le UseEffect le plus dur de ma carrière de débutant 🥵🥵🥵🥵
+  // Récupérations des Data des favoris importé depuis la BDD... le UseEffect le plus dur de ma carrière de débutant 🥵🥵🥵🥵
+
   useEffect(() => {
     const fetchComicData = async () => {
       try {
@@ -94,16 +91,15 @@ const Favorites = ({
         userName={userName}
         setUserName={setUserName}
       />
-
       {isLoading ? (
-        <p>Chargement en cours...</p>
+        <p className="loading-box">Chargement en cours...</p>
       ) : (
         <main>
           <div className="container">
             <div className="global-favorite-Box">
               {!token && (
                 <div className="favorite-login-box">
-                  Veuillez vous connecter pour accéder aux page de favoris
+                  Veuillez vous connecter pour accéder à la page des favoris
                 </div>
               )}
               {token && (

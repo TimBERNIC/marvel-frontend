@@ -107,9 +107,9 @@ const Modal = ({
   };
 
   if (isVisible) {
-    document.body.classList.add("noscroll");
+    document.body.classList.add("body-fix");
   } else {
-    document.body.classList.remove("noscroll");
+    document.body.classList.remove("body-fix");
   }
 
   return (
