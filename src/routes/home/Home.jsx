@@ -144,30 +144,33 @@ const Home = ({
                           }
                           alt="image de super-héro"
                         />
-                        {foundFavorite ? (
-                          <button
-                            className="home-button-star-captain-character"
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              removeCharacterToFavorite(
-                                heroe._id,
-                                foundFavoriteIndex
-                              );
-                            }}>
-                            <span className="metal-star-wrapper">
-                              <img src={etoileLogo} alt="" />
-                            </span>
-                          </button>
-                        ) : (
-                          <button
-                            className="home-favorite-button-character "
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              addCharacterToFavorite(heroe._id);
-                            }}>
-                            Ajouter
-                          </button>
-                        )}
+                        {/* BOUTTONS DE FAVORIS */}
+                        {token ? (
+                          foundFavorite ? (
+                            <button
+                              className="home-button-star-captain-character"
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                removeCharacterToFavorite(
+                                  heroe._id,
+                                  foundFavoriteIndex
+                                );
+                              }}>
+                              <span className="metal-star-wrapper">
+                                <img src={etoileLogo} alt="" />
+                              </span>
+                            </button>
+                          ) : (
+                            <button
+                              className="home-favorite-button-character "
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                addCharacterToFavorite(heroe._id);
+                              }}>
+                              Ajouter
+                            </button>
+                          )
+                        ) : null}
                       </div>
                       <div className="card-details-box">
                         <h3>{heroe.name}</h3>

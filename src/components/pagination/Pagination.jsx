@@ -57,7 +57,7 @@ const Pagination = ({ skip, setSkip, homeData, comicsData }) => {
             <div
               className="pagination-button pagination-left-button"
               onClick={() => {
-                setSkip(skip - 10);
+                setSkip(skip - 12);
                 setPageButton(pageButton - 1);
               }}>
               {"<<"}
@@ -68,11 +68,11 @@ const Pagination = ({ skip, setSkip, homeData, comicsData }) => {
 
           <div className="page-number-box">{pageButton}</div>
 
-          {comicsData.length === 10 ? (
+          {comicsData.length === 12 ? (
             <div
               className="pagination-button pagination-rigth-button"
               onClick={() => {
-                setSkip(skip + 10);
+                setSkip(skip + 12);
                 setPageButton(pageButton + 1);
               }}>
               {">>"}

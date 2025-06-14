@@ -102,7 +102,7 @@ const Favorites = ({
           <div className="container">
             <div className="global-favorite-Box">
               {!token && (
-                <div className="loading-box">
+                <div className="favorite-login-box">
                   Veuillez vous connecter pour accéder aux page de favoris
                 </div>
               )}
@@ -163,8 +163,10 @@ const Favorites = ({
                       })}
                     </div>
                   </div>
+
                   <div className="global-favorite-comics-box">
                     <h3 className="subtitle-favorite">Tes Comics Favoris</h3>
+                    {/* Map des Comics favoris */}
                     {favoritesComicsDataTab.map((comic, index) => {
                       return (
                         <div
@@ -186,7 +188,10 @@ const Favorites = ({
                               comicId: comic._id,
                             });
                           }}>
-                          <div className="image-comic-box">
+                          <h3 className="favorite-comic-title">
+                            {comic.title ? comic.title : "Unknown title"}
+                          </h3>
+                          <div className="favorite-image-comic-box">
                             <img
                               src={
                                 comic.thumbnail.path +
@@ -195,16 +200,6 @@ const Favorites = ({
                               }
                               alt="image du comics "
                             />
-                          </div>
-                          <div className="comics-details-box">
-                            <h3>
-                              {comic.title ? comic.title : "Unknown title"}
-                            </h3>
-                            <p className="comics-details-text-box">
-                              {comic.description
-                                ? comic.description
-                                : "A superhero like no other, but to find out, read his adventures!!"}
-                            </p>
                           </div>
                         </div>
                       );

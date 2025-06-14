@@ -30,14 +30,12 @@
 .comic-modal-picture-box {
   display: flex;
   align-items: flex-start;
-
   margin: 20px;
   width: 50%;
   height: 100%;
 }
 .comic-modal-picture-box > img {
   top: 0px;
-
   object-fit: contain;
   width: 100%;
   height: 100%;

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "../../components/pagination/Pagination";
 import Modal from "../../components/modal/Modal";
+import etoileLogo from "../../assets/img/etoileLogo.png";
 
 const Comics = ({
   token,
@@ -19,7 +20,7 @@ const Comics = ({
 }) => {
   const [comicsData, setComicsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [comicslimit, setComicslimit] = useState(10);
+  const [comicslimit, setComicslimit] = useState(12);
   const [isVisible, setIsVisible] = useState(false);
   const [tempData, setTempData] = useState("");
   const [skip, setSkip] = useState(0);
@@ -54,6 +55,45 @@ const Comics = ({
     fetchData();
   }, [searchingTitle, skip, comicslimit]);
 
+  const addComicToFavorite = async (comicId) => {
+    try {
+      const response = await axios.put(
+        `https://site--marvelproject-backend--cp75xnbbqn97.code.run/user/favorite/add?comicId=${comicId}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const copyTab = [...favoritesTab];
+      copyTab.push({ comicId: comicId });
+      setFavoritesTab(copyTab);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const removeComicToFavorite = async (comicId, foundFavoriteComicIndex) => {
+    try {
+      const response = await axios.put(
+        `https://site--marvelproject-backend--cp75xnbbqn97.code.run/user/favorite/remove?comicId=${comicId}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const copyTab = [...favoritesTab];
+      copyTab.splice(foundFavoriteComicIndex, 1);
+      setFavoritesTab(copyTab);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <>
       <Navbar
@@ -79,6 +119,17 @@ const Comics = ({
               </div>
               <div className="global-comics-box">
                 {comicsData.map((comic, index) => {
+                  const foundFavoriteComic = favoritesTab.find(
+                    (favoriteComic) => {
+                      return favoriteComic.comicId === comic._id;
+                    }
+                  );
+                  const foundFavoriteComicIndex = favoritesTab.findIndex(
+                    (favoriteComic) => {
+                      return favoriteComic.comicId === comic._id;
+                    }
+                  );
+
                   return (
                     <div
                       className="comic-box"
@@ -97,6 +148,10 @@ const Comics = ({
                           comicId: comic._id,
                         });
                       }}>
+                      <h3 className="comic-titles">
+                        {comic.title ? comic.title : "Unknown title"}
+                      </h3>
+
                       <div className="image-comic-box">
                         <img
                           src={
@@ -106,14 +161,35 @@ const Comics = ({
                           }
                           alt="image du comics "
                         />
-                      </div>
-                      <div className="comics-details-box">
-                        <h3>{comic.title ? comic.title : "Unknown title"}</h3>
-                        <p className="comics-details-text-box">
-                          {comic.description
-                            ? comic.description
-                            : "A superhero like no other, but to find out, read his adventures!!"}
-                        </p>
+
+                        {/* BOUTON DE FAVORI */}
+
+                        {token &&
+                          comic._id &&
+                          (foundFavoriteComic ? (
+                            <button
+                              className="comic-button-star-captain"
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                removeComicToFavorite(
+                                  comic._id,
+                                  foundFavoriteComicIndex
+                                );
+                              }}>
+                              <span className="metal-star-wrapper">
+                                <img src={etoileLogo} alt="" />
+                              </span>
+                            </button>
+                          ) : (
+                            <button
+                              className="comic-button-register "
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                addComicToFavorite(comic._id);
+                              }}>
+                              Ajouter
+                            </button>
+                          ))}
                       </div>
                     </div>
                   );
