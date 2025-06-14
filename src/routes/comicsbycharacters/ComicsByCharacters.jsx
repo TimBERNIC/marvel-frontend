@@ -18,9 +18,13 @@ const ComicsByCharacters = ({
   const [isVisible, setIsVisible] = useState(false);
   const [tempData, setTempData] = useState("");
 
-  const { comics, name, thumbnail: avatar, _id: characterId } = heroeData;
-
-  console.log(characterId);
+  const {
+    comics,
+    name,
+    thumbnail: avatar,
+    _id: characterId,
+    description,
+  } = heroeData;
 
   useEffect(() => {
     const fetchComicsByHeroeData = async () => {
@@ -99,7 +103,7 @@ const ComicsByCharacters = ({
                   src={avatar.path + "." + avatar.extension}
                   alt="avatar du héro"
                 />
-
+                {/* BUTTON FAVORI */}
                 {foundFavorite ? (
                   <button
                     className="favorite-button-star-captain-character"
@@ -118,7 +122,11 @@ const ComicsByCharacters = ({
                   </button>
                 )}
               </div>
-
+              <div className="heroe-presentation">
+                {description
+                  ? description
+                  : "An Unknown heroe in a forgotten world. it's to you to find his way..."}
+              </div>
               <h2>
                 Comics dans lesquels vous pourrez retrouver{" "}
                 <span className="weight">{name}</span>{" "}

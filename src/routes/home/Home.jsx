@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination from "../../components/pagination/Pagination";
 import { useNavigate } from "react-router-dom";
+import etoileLogo from "../../assets/img/etoileLogo.png";
 
 const Home = ({
   token,
@@ -15,6 +16,8 @@ const Home = ({
   setUserId,
   userName,
   setUserName,
+  favoritesTab,
+  setFavoritesTab,
 }) => {
   const [homeData, setHomeData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -50,6 +53,45 @@ const Home = ({
     fetchData();
   }, [searchingName, skip, limit]);
 
+  const addCharacterToFavorite = async (characterId) => {
+    try {
+      const response = await axios.put(
+        `https://site--marvelproject-backend--cp75xnbbqn97.code.run/user/favorite/add?characterId=${characterId}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const copyTab = [...favoritesTab];
+      copyTab.push({ characterId: characterId });
+      setFavoritesTab(copyTab);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const removeCharacterToFavorite = async (characterId, foundFavoriteIndex) => {
+    try {
+      const response = await axios.put(
+        `https://site--marvelproject-backend--cp75xnbbqn97.code.run/user/favorite/remove?characterId=${characterId}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const copyTab = [...favoritesTab];
+      copyTab.splice(foundFavoriteIndex, 1);
+      setFavoritesTab(copyTab);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <>
       <Navbar
@@ -75,6 +117,17 @@ const Home = ({
               </div>
               <div className="global-card-box">
                 {homeData.map((heroe, index) => {
+                  const foundFavorite = favoritesTab.find(
+                    (favoriteCharacter) => {
+                      return favoriteCharacter.characterId === heroe._id;
+                    }
+                  );
+                  const foundFavoriteIndex = favoritesTab.findIndex(
+                    (favoriteCharacter) => {
+                      return favoriteCharacter.characterId === heroe._id;
+                    }
+                  );
+
                   return (
                     <div
                       className="card-box"
@@ -91,6 +144,30 @@ const Home = ({
                           }
                           alt="image de super-héro"
                         />
+                        {foundFavorite ? (
+                          <button
+                            className="home-button-star-captain-character"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              removeCharacterToFavorite(
+                                heroe._id,
+                                foundFavoriteIndex
+                              );
+                            }}>
+                            <span className="metal-star-wrapper">
+                              <img src={etoileLogo} alt="" />
+                            </span>
+                          </button>
+                        ) : (
+                          <button
+                            className="home-favorite-button-character "
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              addCharacterToFavorite(heroe._id);
+                            }}>
+                            Ajouter
+                          </button>
+                        )}
                       </div>
                       <div className="card-details-box">
                         <h3>{heroe.name}</h3>

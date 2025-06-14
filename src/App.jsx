@@ -20,7 +20,7 @@ const App = () => {
   const [userName, setUserName] = useState("");
   const [searchingName, setSearchingName] = useState("");
   const [searchingTitle, setSearchingTitle] = useState("");
-  console.log(favoritesTab);
+
   //Récupération des donénes utilisateur si token présent.
   useEffect(() => {
     const fetchData = async () => {
@@ -47,8 +47,6 @@ const App = () => {
     };
     fetchData();
   }, []);
-
-  console.log(favoritesTab);
 
   return (
     <>
@@ -81,6 +79,7 @@ const App = () => {
                 userName={userName}
                 setUserName={setUserName}
                 favoritesTab={favoritesTab}
+                setFavoritesTab={setFavoritesTab}
               />
             }></Route>
           <Route
