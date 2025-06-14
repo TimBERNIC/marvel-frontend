@@ -76,12 +76,13 @@ const Home = ({
               <div className="global-card-box">
                 {homeData.map((heroe, index) => {
                   return (
-                    <div className="card-box" key={index}>
-                      <div
-                        className="image-card-box"
-                        onClick={() => {
-                          navigate(`/${heroe._id}/comics`);
-                        }}>
+                    <div
+                      className="card-box"
+                      key={index}
+                      onClick={() => {
+                        navigate(`/${heroe._id}/comics`);
+                      }}>
+                      <div className="image-card-box">
                         <img
                           src={
                             heroe.thumbnail.path +

@@ -4,6 +4,7 @@ import axios from "axios";
 import "./ComicsByCharacters.css";
 import Navbar from "../../components/navbar/Navbar";
 import Modal from "../../components/modal/Modal";
+import etoileLogo from "../../assets/img/etoileLogo.png";
 
 const ComicsByCharacters = ({
   token,
@@ -17,9 +18,9 @@ const ComicsByCharacters = ({
   const [isVisible, setIsVisible] = useState(false);
   const [tempData, setTempData] = useState("");
 
-  const { comics, name, thumbnail: avatar, id } = heroeData;
+  const { comics, name, thumbnail: avatar, _id: characterId } = heroeData;
 
-  console.log(tempData);
+  console.log(characterId);
 
   useEffect(() => {
     const fetchComicsByHeroeData = async () => {
@@ -35,6 +36,52 @@ const ComicsByCharacters = ({
     };
     fetchComicsByHeroeData();
   }, []);
+
+  const foundFavorite = favoritesTab.find((favoriteCharacter) => {
+    return favoriteCharacter.characterId === characterId;
+  });
+  const foundFavoriteIndex = favoritesTab.findIndex((favoriteCharacter) => {
+    return favoriteCharacter.characterId === characterId;
+  });
+
+  const addCharacterToFavorite = async () => {
+    try {
+      const response = await axios.put(
+        `https://site--marvelproject-backend--cp75xnbbqn97.code.run/user/favorite/add?characterId=${characterId}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const copyTab = [...favoritesTab];
+      copyTab.push({ characterId: characterId });
+      setFavoritesTab(copyTab);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const removeCharacterToFavorite = async () => {
+    try {
+      const response = await axios.put(
+        `https://site--marvelproject-backend--cp75xnbbqn97.code.run/user/favorite/remove?characterId=${characterId}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const copyTab = [...favoritesTab];
+      copyTab.splice(foundFavoriteIndex, 1);
+      setFavoritesTab(copyTab);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   return (
     <>
@@ -52,7 +99,26 @@ const ComicsByCharacters = ({
                   src={avatar.path + "." + avatar.extension}
                   alt="avatar du héro"
                 />
+
+                {foundFavorite ? (
+                  <button
+                    className="favorite-button-star-captain-character"
+                    onClick={removeCharacterToFavorite}>
+                    <span className="metal-star-wrapper">
+                      <img src={etoileLogo} alt="" />
+                    </span>
+                  </button>
+                ) : (
+                  <button
+                    className="favorite-button-character "
+                    onClick={addCharacterToFavorite}>
+                    <p className="favorite-button-text">
+                      Cliquez pour ajouter en favoris
+                    </p>
+                  </button>
+                )}
               </div>
+
               <h2>
                 Comics dans lesquels vous pourrez retrouver{" "}
                 <span className="weight">{name}</span>{" "}

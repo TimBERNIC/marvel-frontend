@@ -17,6 +17,13 @@ const Favorites = ({
 }) => {
   const [isLoading, setisLoading] = useState(true);
   const [favoritesComicsDataTab, setfavoritesComicsDataTab] = useState([]);
+  const [favoritesCharactersDataTab, setFavoritesCharactersDataTab] = useState(
+    []
+  );
+
+  console.log(favoritesTab);
+  console.log(favoritesComicsDataTab);
+  console.log(favoritesCharactersDataTab);
 
   // pour les Modal
   const [isVisible, setIsVisible] = useState(false);
@@ -26,11 +33,13 @@ const Favorites = ({
   useEffect(() => {
     const fetchComicData = async () => {
       try {
-        const fetchAllComicsData = favoritesTab.map((comic) =>
-          axios.get(
-            `https://site--marvelproject-backend--cp75xnbbqn97.code.run/comic/${comic.comicId}`
-          )
-        );
+        const fetchAllComicsData = favoritesTab
+          .filter((element) => element.comicId)
+          .map((element) => {
+            return axios.get(
+              `https://site--marvelproject-backend--cp75xnbbqn97.code.run/comic/${element.comicId}`
+            );
+          });
 
         //Ok renvoie un tableau avec toutes les promises après await
         const responses = await Promise.all(fetchAllComicsData);
@@ -42,8 +51,29 @@ const Favorites = ({
             return response.data;
           })
         );
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
 
-        setisLoading(false);
+    const fetchCharactersData = async () => {
+      try {
+        const fetchAllCharactersData = favoritesTab
+          .filter((element) => element.characterId)
+          .map((element) => {
+            return axios.get(
+              `https://site--marvelproject-backend--cp75xnbbqn97.code.run/character/${element.characterId}`
+            );
+          });
+
+        const responses = await Promise.all(fetchAllCharactersData);
+
+        console.log(responses);
+        setFavoritesCharactersDataTab(
+          responses.map((response) => {
+            return response.data;
+          })
+        );
       } catch (error) {
         console.log(error.message);
       }
@@ -51,6 +81,7 @@ const Favorites = ({
 
     setisLoading(false);
     fetchComicData();
+    fetchCharactersData();
   }, [favoritesTab]);
 
   return (
@@ -71,7 +102,7 @@ const Favorites = ({
           <div className="container">
             <div className="global-favorite-Box">
               {!token && (
-                <div className="favorite-non-register-box">
+                <div className="loading-box">
                   Veuillez vous connecter pour accéder aux page de favoris
                 </div>
               )}
@@ -86,53 +117,98 @@ const Favorites = ({
                     Voici tout tes favoris sélectionnés à ce jour
                   </p>
 
-                  <div>
-                    <div className="global-comics-box">
-                      {favoritesComicsDataTab.map((comic, index) => {
+                  <div className="global-favorite-character-box">
+                    <h3 className="subtitle-favorite">Tes héros Favoris</h3>
+                    <div className="favorite-characters-box">
+                      {favoritesCharactersDataTab.map((character, index) => {
                         return (
                           <div
-                            className="comic-box"
+                            className="character-box"
                             key={index}
                             onClick={() => {
                               setIsVisible(!isVisible);
                               setTempData({
                                 picture:
-                                  comic.thumbnail.path +
+                                  character.thumbnail.path +
                                   "." +
-                                  comic.thumbnail.extension,
-                                title: comic.title
-                                  ? comic.title
-                                  : "Unknown title",
-                                description: comic.description
-                                  ? comic.description
+                                  character.thumbnail.extension,
+                                title: character.name
+                                  ? character.name
+                                  : "Unknown",
+                                description: character.description
+                                  ? character.description
                                   : "A superhero like no other, but to find out, read his adventures!!",
-                                comicId: comic._id,
+                                characterId: character._id,
                               });
                             }}>
-                            <div className="image-comic-box">
+                            <div className="characters-details-name">
+                              <h3>
+                                {character.name
+                                  ? character.name
+                                  : "Unknown title"}
+                              </h3>
+                            </div>
+                            <div className="image-character-box">
                               <img
                                 src={
-                                  comic.thumbnail.path +
+                                  character.thumbnail.path +
                                   "." +
-                                  comic.thumbnail.extension
+                                  character.thumbnail.extension
                                 }
-                                alt="image du comics "
+                                alt="image du character "
                               />
-                            </div>
-                            <div className="comics-details-box">
-                              <h3>
-                                {comic.title ? comic.title : "Unknown title"}
-                              </h3>
-                              <p className="comics-details-text-box">
-                                {comic.description
-                                  ? comic.description
-                                  : "A superhero like no other, but to find out, read his adventures!!"}
-                              </p>
                             </div>
                           </div>
                         );
                       })}
                     </div>
+                  </div>
+                  <div className="global-favorite-comics-box">
+                    <h3 className="subtitle-favorite">Tes Comics Favoris</h3>
+                    {favoritesComicsDataTab.map((comic, index) => {
+                      return (
+                        <div
+                          className="comic-box"
+                          key={index}
+                          onClick={() => {
+                            setIsVisible(!isVisible);
+                            setTempData({
+                              picture:
+                                comic.thumbnail.path +
+                                "." +
+                                comic.thumbnail.extension,
+                              title: comic.title
+                                ? comic.title
+                                : "Unknown title",
+                              description: comic.description
+                                ? comic.description
+                                : "A superhero like no other, but to find out, read his adventures!!",
+                              comicId: comic._id,
+                            });
+                          }}>
+                          <div className="image-comic-box">
+                            <img
+                              src={
+                                comic.thumbnail.path +
+                                "." +
+                                comic.thumbnail.extension
+                              }
+                              alt="image du comics "
+                            />
+                          </div>
+                          <div className="comics-details-box">
+                            <h3>
+                              {comic.title ? comic.title : "Unknown title"}
+                            </h3>
+                            <p className="comics-details-text-box">
+                              {comic.description
+                                ? comic.description
+                                : "A superhero like no other, but to find out, read his adventures!!"}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}

@@ -74,7 +74,7 @@ const Comics = ({
                 <h1>Découvrez tout les comics de la license</h1>
                 <h2>
                   Choississez l'un d'entre eux pour découvrir des détails et
-                  résumés à leur sujets !
+                  résumés à leur sujet!
                 </h2>
               </div>
               <div className="global-comics-box">

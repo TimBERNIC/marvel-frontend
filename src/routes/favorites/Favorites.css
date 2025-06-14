@@ -18,3 +18,87 @@
   text-shadow: 28px 14px 8px #333333;
   -webkit-text-stroke: 1px black;
 }
+
+.subtitle-favorite {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0 50px;
+  font-size: 24px;
+  text-align: center;
+  color: white;
+  text-shadow: 28px 14px 8px #333333;
+  -webkit-text-stroke: 1px black;
+  text-align: center;
+  width: 100%;
+}
+.favorites-box {
+}
+
+.global-favorite-comics-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.global-favorite-character-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 50px;
+}
+.favorite-characters-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.character-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  background-color: black;
+  border: solid 2px rgb(168, 1, 1);
+  cursor: pointer;
+}
+.character-box:hover {
+  border: solid 2px rgb(255, 255, 255);
+}
+.image-character-box {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.image-character-box > img {
+  width: 100%;
+  height: 100%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  object-fit: cover;
+}
+
+.characters-details-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  text-align: center;
+  color: white;
+  text-shadow: 28px 14px 8px #333333;
+  -webkit-text-stroke: 1px black;
+  text-align: center;
+  width: 100%;
+  padding: 0 10px;
+  height: 25%;
+}

@@ -80,6 +80,7 @@ const App = () => {
                 setUserId={setUserId}
                 userName={userName}
                 setUserName={setUserName}
+                favoritesTab={favoritesTab}
               />
             }></Route>
           <Route

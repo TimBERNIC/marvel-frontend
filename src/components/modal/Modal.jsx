@@ -1,8 +1,5 @@
 import "./Modal.css";
 import axios from "axios";
-import { MdOutlineStar } from "react-icons/md";
-import { MdOutlineStarBorder } from "react-icons/md";
-import { useState } from "react";
 import etoileLogo from "../../assets/img/etoileLogo.png";
 
 const Modal = ({
@@ -13,22 +10,19 @@ const Modal = ({
   favoritesTab,
   setFavoritesTab,
 }) => {
-  const { picture, title, description, comicId } = tempData;
+  const { picture, title, description, comicId, characterId } = tempData;
 
-  console.log(favoritesTab);
-  console.log(comicId);
-
-  const foundFavorite = favoritesTab.find((favoriteComic) => {
+  const foundFavoriteComic = favoritesTab.find((favoriteComic) => {
     return favoriteComic.comicId === comicId;
   });
-  const foundFavoriteIndex = favoritesTab.findIndex((favoriteComic) => {
+  const foundFavoriteComicIndex = favoritesTab.findIndex((favoriteComic) => {
     return favoriteComic.comicId === comicId;
   });
 
-  const addToFavorite = async () => {
+  const addComicToFavorite = async () => {
     try {
       const response = await axios.put(
-        `https://site--marvelproject-backend--cp75xnbbqn97.code.run/user/favorite/add?id=${comicId}`,
+        `https://site--marvelproject-backend--cp75xnbbqn97.code.run/user/favorite/add?comicId=${comicId}`,
         {},
         {
           headers: {
@@ -45,10 +39,10 @@ const Modal = ({
     }
   };
 
-  const removeToFavorite = async () => {
+  const removeComicToFavorite = async () => {
     try {
       const response = await axios.put(
-        `https://site--marvelproject-backend--cp75xnbbqn97.code.run/user/favorite/remove?id=${comicId}`,
+        `https://site--marvelproject-backend--cp75xnbbqn97.code.run/user/favorite/remove?comicId=${comicId}`,
         {},
         {
           headers: {
@@ -57,7 +51,55 @@ const Modal = ({
         }
       );
       const copyTab = [...favoritesTab];
-      copyTab.splice(foundFavoriteIndex, 1);
+      copyTab.splice(foundFavoriteComicIndex, 1);
+      setFavoritesTab(copyTab);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const foundCharacterFavorite = favoritesTab.find((favoriteCharacter) => {
+    return favoriteCharacter.characterId === characterId;
+  });
+  const foundCharacterFavoriteIndex = favoritesTab.findIndex(
+    (favoriteCharacter) => {
+      return favoriteCharacter.characterId === characterId;
+    }
+  );
+
+  const addCharacterToFavorite = async () => {
+    try {
+      const response = await axios.put(
+        `https://site--marvelproject-backend--cp75xnbbqn97.code.run/user/favorite/add?characterId=${characterId}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const copyTab = [...favoritesTab];
+      copyTab.push({ characterId: characterId });
+      setFavoritesTab(copyTab);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const removeCharacterToFavorite = async () => {
+    try {
+      const response = await axios.put(
+        `https://site--marvelproject-backend--cp75xnbbqn97.code.run/user/favorite/remove?characterId=${characterId}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const copyTab = [...favoritesTab];
+      copyTab.splice(foundCharacterFavoriteIndex, 1);
       setFavoritesTab(copyTab);
     } catch (error) {
       console.log(error.response);
@@ -97,27 +139,43 @@ const Modal = ({
                   : `A super adventure where you can find your favorite heroes`}
               </p>
             </div>
+            {comicId &&
+              (foundFavoriteComic ? (
+                <button
+                  className="favorite-button-star-captain"
+                  onClick={removeComicToFavorite}>
+                  <span className="metal-star-wrapper">
+                    <img src={etoileLogo} alt="" />
+                  </span>
+                </button>
+              ) : (
+                <button
+                  className="favorite-button-register "
+                  onClick={addComicToFavorite}>
+                  <p className="favorite-button-text">
+                    Cliquez pour ajouter en favoris!
+                  </p>
+                </button>
+              ))}
 
-            <p className="favorite-button-text">
-              Cliquez pour ajouter en favoris!
-            </p>
-            {foundFavorite ? (
-              <button
-                className="favorite-button-star-captain"
-                onClick={removeToFavorite}>
-                <span className="metal-star-wrapper">
-                  <img src={etoileLogo} alt="" />
-                  {/* <MdOutlineStar
-                    border="solid 2px black"
-                    className="metal-star"
-                  /> */}
-                </span>
-              </button>
-            ) : (
-              <button className="favorite-button-star " onClick={addToFavorite}>
-                <MdOutlineStarBorder />
-              </button>
-            )}
+            {characterId &&
+              (foundCharacterFavorite ? (
+                <button
+                  className="favorite-button-star-captain"
+                  onClick={removeCharacterToFavorite}>
+                  <span className="metal-star-wrapper">
+                    <img src={etoileLogo} alt="" />
+                  </span>
+                </button>
+              ) : (
+                <button
+                  className="favorite-button-register "
+                  onClick={addCharacterToFavorite}>
+                  <p className="favorite-button-text">
+                    Cliquez pour ajouter en favoris!
+                  </p>
+                </button>
+              ))}
           </div>
         </div>
       )}
