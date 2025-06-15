@@ -1,15 +1,16 @@
 .ComicsByCharacters-main {
   position: relative;
+  overflow-x: hidden;
 }
-.noscroll {
-  overflow: hidden;
-}
+
 .heroe-comics-box {
   width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
+  margin-bottom: 20px;
+  border: solid 2px rgb(0, 9, 179);
 }
 .avatar-box {
   display: flex;
