@@ -25,7 +25,7 @@ const Welcome = () => {
 
           setTimeout(() => {
             navigate("/home");
-          }, 3000);
+          }, 4000);
         }, 300);
       }
     }, 100);
