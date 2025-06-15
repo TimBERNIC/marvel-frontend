@@ -1,4 +1,4 @@
-import "../Footer/Footer.css";
+import "./Footer.css";
 import { useLocation } from "react-router-dom";
 const Footer = () => {
   const location = useLocation();
@@ -6,7 +6,7 @@ const Footer = () => {
     location.pathname !== "/" && (
       <footer>
         <div className="footer-box container">
-          This exercice was made with
+          This project was made with
           <span className="footer-caracters"> React </span> by
           <a href="https://github.com/TimBERNIC" className="footer-caracters">
             TimBERNIC
