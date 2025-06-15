@@ -19,6 +19,7 @@ const ComicsByCharacters = ({
   const [isVisible, setIsVisible] = useState(false);
   const [tempData, setTempData] = useState("");
   const navigate = useNavigate();
+
   const {
     comics,
     name,
@@ -42,12 +43,13 @@ const ComicsByCharacters = ({
     fetchComicsByHeroeData();
   }, []);
 
-  const foundFavorite = favoritesTab.find((favoriteCharacter) => {
-    return favoriteCharacter.characterId === characterId;
-  });
-  const foundFavoriteIndex = favoritesTab.findIndex((favoriteCharacter) => {
-    return favoriteCharacter.characterId === characterId;
-  });
+  const foundFavorite = favoritesTab.find(
+    (favoriteCharacter) => favoriteCharacter.characterId === characterId
+  );
+
+  const foundFavoriteIndex = favoritesTab.findIndex(
+    (favoriteCharacter) => favoriteCharacter.characterId === characterId
+  );
 
   const addCharacterToFavorite = async () => {
     try {
@@ -62,7 +64,7 @@ const ComicsByCharacters = ({
       );
 
       const copyTab = [...favoritesTab];
-      copyTab.push({ characterId: characterId });
+      copyTab.push({ characterId });
       setFavoritesTab(copyTab);
     } catch (error) {
       console.log(error.response);
@@ -111,8 +113,6 @@ const ComicsByCharacters = ({
                   src={avatar.path + "." + avatar.extension}
                   alt="avatar du héro"
                 />
-                {/* BUTTON FAVORI */}
-
                 {token ? (
                   foundFavorite ? (
                     <button
@@ -142,43 +142,51 @@ const ComicsByCharacters = ({
               </div>
               <h2>
                 Comics dans lesquels vous pourrez retrouver{" "}
-                <span className="weight">{name}</span>{" "}
+                <span className="weight">{name}</span>
               </h2>
             </div>
-            <div className="heroe-comics-box">
-              {comics.map((comic, index) => {
-                return (
-                  <div
-                    className="heroe-comic-box"
-                    key={index}
-                    onClick={() => {
-                      setTempData({
-                        picture:
-                          comic.thumbnail.path +
-                          "." +
-                          comic.thumbnail.extension,
-                        title: comic.title ? comic.title : "Unknown title",
-                        description: comic.description
-                          ? comic.description
-                          : "A superhero like no other, but to find out, read his adventures!!",
-                        comicId: comic._id,
-                      });
-                      setIsVisible(!isVisible);
-                    }}>
-                    <h3>{comic.title}</h3>
-                    <div className="heroe-comic-picture-box">
-                      <img
-                        src={
-                          comic.thumbnail.path + "." + comic.thumbnail.extension
-                        }
-                        alt="photo du comic"
-                      />
+
+            {comics.length ? (
+              <div className="heroe-comics-box">
+                {comics.map((comic, index) => {
+                  return (
+                    <div
+                      className="heroe-comic-box"
+                      key={index}
+                      onClick={() => {
+                        setTempData({
+                          picture:
+                            comic.thumbnail.path +
+                            "." +
+                            comic.thumbnail.extension,
+                          title: comic.title ? comic.title : "Unknown title",
+                          description: comic.description
+                            ? comic.description
+                            : "A superhero like no other, but to find out, read his adventures!!",
+                          comicId: comic._id,
+                        });
+                        setIsVisible(!isVisible);
+                      }}>
+                      <h3>{comic.title}</h3>
+                      <div className="heroe-comic-picture-box">
+                        <img
+                          src={
+                            comic.thumbnail.path +
+                            "." +
+                            comic.thumbnail.extension
+                          }
+                          alt="photo du comic"
+                        />
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="no-comic">Encore aucun comic paru à ce jour</p>
+            )}
           </div>
+
           <Modal
             tempData={tempData}
             isVisible={isVisible}
