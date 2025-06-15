@@ -40,6 +40,7 @@ const Login = ({ token, setToken, setUserId, setUserName }) => {
         setPasswordError(false);
         setUserId(response.data._id);
         setUserName(response.data.name);
+        setToken(response.data.token);
         navigate("/home");
       } else {
         setPasswordError(true);

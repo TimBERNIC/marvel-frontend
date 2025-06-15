@@ -117,7 +117,7 @@ const Comics = ({
                   résumés à leur sujet!
                 </h2>
               </div>
-              <div className="global-comics-box">
+              <div className="global-comic-box">
                 {comicsData.map((comic, index) => {
                   const foundFavoriteComic = favoritesTab.find(
                     (favoriteComic) => {

@@ -32,7 +32,12 @@ const Navbar = ({
                   setButton1Click(false);
                 }, 200);
               }}></div>
-            <p className={button1Click ? "clicked" : ""}>MENU</p>
+            <p
+              className={
+                button1Click ? "menu-name-box clicked" : "menu-name-box"
+              }>
+              MENU
+            </p>
           </div>
           <div
             className={

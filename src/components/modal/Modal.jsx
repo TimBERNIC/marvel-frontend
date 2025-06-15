@@ -155,9 +155,7 @@ const Modal = ({
                 <button
                   className="favorite-button-register "
                   onClick={addComicToFavorite}>
-                  <p className="favorite-button-text">
-                    Cliquez pour ajouter en favoris!
-                  </p>
+                  <p className="favorite-button-text">Ajouter!</p>
                 </button>
               ))}
 

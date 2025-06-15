@@ -145,3 +145,47 @@
   border-radius: 10px;
   border: solid 2px rgb(166, 1, 1);
 }
+
+@media (max-width: 600px) {
+  .avatar-box {
+    margin: 20px 0;
+    padding-bottom: 20px;
+  }
+  .avatar-box > h1 {
+    font-size: 30px;
+  }
+
+  .avatar-picture-box {
+    margin: 20px;
+    height: 260px;
+    width: 260px;
+  }
+  .avatar-box > h2 {
+    font-size: 20px;
+    padding: 0 20px;
+  }
+
+  .heroe-presentation {
+    width: 260px;
+  }
+  .heroe-comics-box {
+    margin-left: 20px;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    margin-top: -20px;
+    overflow: scroll;
+    gap: 5px;
+    width: 100%;
+    border-left: 2px solid rgb(117, 0, 0);
+    border-radius: 20px;
+  }
+  .heroe-comic-box {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    flex-shrink: 0;
+    border: solid 3px rgb(166, 1, 1);
+    border-radius: 10px;
+    box-shadow: 6px 5px 20px 5px rgba(0, 0, 0, 0.39);
+  }
+}

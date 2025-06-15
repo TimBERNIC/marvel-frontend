@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     location.pathname !== "/" && (
       <footer>
-        <div className="container">
+        <div className="footer-box container">
           This exercice was made with
           <span className="footer-caracters"> React </span> by
           <a href="https://github.com/TimBERNIC" className="footer-caracters">

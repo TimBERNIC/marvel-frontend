@@ -64,3 +64,20 @@ form > input {
   color: red;
   text-align: center;
 }
+
+@media (max-width: 600px) {
+  .global-form-div {
+    margin: 3vh 10px;
+    height: 350px;
+  }
+  form {
+    padding: 10px;
+  }
+
+  form > input {
+    width: 70%;
+  }
+  .log-button {
+    width: 70%;
+  }
+}

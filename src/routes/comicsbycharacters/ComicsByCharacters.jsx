@@ -116,7 +116,7 @@ const ComicsByCharacters = ({
                     </button>
                   ) : (
                     <button
-                      className="favorite-button-character "
+                      className="favorite-button-character"
                       onClick={addCharacterToFavorite}>
                       <p className="favorite-button-text">
                         Cliquez pour ajouter en favoris

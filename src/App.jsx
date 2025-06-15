@@ -46,7 +46,7 @@ const App = () => {
       }
     };
     fetchData();
-  }, [userId, token, favoritesTab, userName]);
+  }, [token]);
 
   return (
     <>

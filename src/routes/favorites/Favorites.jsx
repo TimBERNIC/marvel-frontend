@@ -96,7 +96,7 @@ const Favorites = ({
       ) : (
         <main>
           <div className="container">
-            <div className="global-favorite-Box">
+            <div className="global-favorite-box">
               {!token && (
                 <div className="favorite-login-box">
                   Veuillez vous connecter pour accéder à la page des favoris
@@ -105,8 +105,9 @@ const Favorites = ({
               {token && (
                 <div className="favorites-box">
                   <h1 className="favorite-title">
+                    Bienvenue sur ta collection <br />
                     <MdOutlineStar color="orange" />
-                    Bienvenue sur ta connection {userName}!
+                    {userName}
                     <MdOutlineStar color="orange" />
                   </h1>
                   <p className="favorite-text">
@@ -163,43 +164,45 @@ const Favorites = ({
                   <div className="global-favorite-comics-box">
                     <h3 className="subtitle-favorite">Tes Comics Favoris</h3>
                     {/* Map des Comics favoris */}
-                    {favoritesComicsDataTab.map((comic, index) => {
-                      return (
-                        <div
-                          className="comic-box"
-                          key={index}
-                          onClick={() => {
-                            setIsVisible(!isVisible);
-                            setTempData({
-                              picture:
-                                comic.thumbnail.path +
-                                "." +
-                                comic.thumbnail.extension,
-                              title: comic.title
-                                ? comic.title
-                                : "Unknown title",
-                              description: comic.description
-                                ? comic.description
-                                : "A superhero like no other, but to find out, read his adventures!!",
-                              comicId: comic._id,
-                            });
-                          }}>
-                          <h3 className="favorite-comic-title">
-                            {comic.title ? comic.title : "Unknown title"}
-                          </h3>
-                          <div className="favorite-image-comic-box">
-                            <img
-                              src={
-                                comic.thumbnail.path +
-                                "." +
-                                comic.thumbnail.extension
-                              }
-                              alt="image du comics "
-                            />
+                    <div className="favorite-comics-box">
+                      {favoritesComicsDataTab.map((comic, index) => {
+                        return (
+                          <div
+                            className="comic-box"
+                            key={index}
+                            onClick={() => {
+                              setIsVisible(!isVisible);
+                              setTempData({
+                                picture:
+                                  comic.thumbnail.path +
+                                  "." +
+                                  comic.thumbnail.extension,
+                                title: comic.title
+                                  ? comic.title
+                                  : "Unknown title",
+                                description: comic.description
+                                  ? comic.description
+                                  : "A superhero like no other, but to find out, read his adventures!!",
+                                comicId: comic._id,
+                              });
+                            }}>
+                            <h3 className="favorite-comic-title">
+                              {comic.title ? comic.title : "Unknown title"}
+                            </h3>
+                            <div className="favorite-image-comic-box">
+                              <img
+                                src={
+                                  comic.thumbnail.path +
+                                  "." +
+                                  comic.thumbnail.extension
+                                }
+                                alt="image du comics "
+                              />
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               )}

@@ -8,6 +8,71 @@ const Pagination = ({ skip, setSkip, homeData, comicsData }) => {
 
   return (
     <div className="pagination-box">
+      <div className="pagination-central-button-box">
+        {location.pathname === "/home" && (
+          <>
+            {pageButton > 1 ? (
+              <div
+                className="pagination-button pagination-left-button"
+                onClick={() => {
+                  setSkip(skip - 100);
+                  setPageButton(pageButton - 1);
+                }}>
+                {"<<"}
+              </div>
+            ) : (
+              <div className="pagination-left-button"></div>
+            )}
+
+            <div className="page-number-box">{pageButton}</div>
+
+            {homeData.length === 100 ? (
+              <div
+                className="pagination-button pagination-rigth-button"
+                onClick={() => {
+                  setSkip(skip + 100);
+                  setPageButton(pageButton + 1);
+                }}>
+                {">>"}
+              </div>
+            ) : (
+              <div className="pagination-rigth-button"></div>
+            )}
+          </>
+        )}
+
+        {location.pathname === "/comics" && (
+          <>
+            {pageButton > 1 ? (
+              <div
+                className="pagination-button pagination-left-button"
+                onClick={() => {
+                  setSkip(skip - 12);
+                  setPageButton(pageButton - 1);
+                }}>
+                {"<<"}
+              </div>
+            ) : (
+              <div className="pagination-left-button"></div>
+            )}
+
+            <div className="page-number-box">{pageButton}</div>
+
+            {comicsData.length === 12 ? (
+              <div
+                className="pagination-button pagination-rigth-button"
+                onClick={() => {
+                  setSkip(skip + 12);
+                  setPageButton(pageButton + 1);
+                }}>
+                {">>"}
+              </div>
+            ) : (
+              <div className="pagination-rigth-button"></div>
+            )}
+          </>
+        )}
+      </div>
       {pageButton > 1 && (
         <div
           className="pagination-button reset-pagination"
@@ -17,70 +82,6 @@ const Pagination = ({ skip, setSkip, homeData, comicsData }) => {
           }}>
           Retour page 1
         </div>
-      )}
-
-      {location.pathname === "/home" && (
-        <>
-          {pageButton > 1 ? (
-            <div
-              className="pagination-button pagination-left-button"
-              onClick={() => {
-                setSkip(skip - 100);
-                setPageButton(pageButton - 1);
-              }}>
-              {"<<"}
-            </div>
-          ) : (
-            <div className="pagination-left-button"></div>
-          )}
-
-          <div className="page-number-box">{pageButton}</div>
-
-          {homeData.length === 100 ? (
-            <div
-              className="pagination-button pagination-rigth-button"
-              onClick={() => {
-                setSkip(skip + 100);
-                setPageButton(pageButton + 1);
-              }}>
-              {">>"}
-            </div>
-          ) : (
-            <div className="pagination-rigth-button"></div>
-          )}
-        </>
-      )}
-
-      {location.pathname === "/comics" && (
-        <>
-          {pageButton > 1 ? (
-            <div
-              className="pagination-button pagination-left-button"
-              onClick={() => {
-                setSkip(skip - 12);
-                setPageButton(pageButton - 1);
-              }}>
-              {"<<"}
-            </div>
-          ) : (
-            <div className="pagination-left-button"></div>
-          )}
-
-          <div className="page-number-box">{pageButton}</div>
-
-          {comicsData.length === 12 ? (
-            <div
-              className="pagination-button pagination-rigth-button"
-              onClick={() => {
-                setSkip(skip + 12);
-                setPageButton(pageButton + 1);
-              }}>
-              {">>"}
-            </div>
-          ) : (
-            <div className="pagination-rigth-button"></div>
-          )}
-        </>
       )}
     </div>
   );

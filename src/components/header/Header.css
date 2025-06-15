@@ -2,8 +2,9 @@ header {
   position: relative;
   z-index: 100;
   background-color: #ed181f;
-  height: 120px;
+  min-height: 120px;
   box-shadow: inset 0px 11px 34px -8px rgba(0, 0, 0, 0.81);
+  width: 100%;
 }
 
 .global-header-box {
@@ -30,8 +31,9 @@ header {
 }
 
 .input-box {
+  width: 35vw;
   height: 30px;
-  width: 300px;
+  max-width: 300px;
 }
 
 .input-home,
@@ -47,4 +49,21 @@ header {
   justify-content: flex-start;
   align-items: center;
   height: 30px;
+}
+
+@media (max-width: 600px) {
+  .global-header-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+  }
+  .welcome-user-box {
+    display: none;
+  }
+
+  .input-box {
+    width: 250px;
+  }
 }
