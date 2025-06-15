@@ -10,20 +10,22 @@ const Comics = ({
   token,
   setToken,
   searchingTitle,
-  setSearchingTitle,
   userId,
   setUserId,
   userName,
   setUserName,
   favoritesTab,
   setFavoritesTab,
+  pageButton,
+  setPageButton,
+  skipComic,
+  setSkipComic,
 }) => {
   const [comicsData, setComicsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [comicslimit, setComicslimit] = useState(12);
+  const [comicsLimit, setComicslimit] = useState(12);
   const [isVisible, setIsVisible] = useState(false);
   const [tempData, setTempData] = useState("");
-  const [skip, setSkip] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,14 +35,16 @@ const Comics = ({
         if (searchingTitle) {
           filter += `?title=${searchingTitle}`;
         }
-        if (comicslimit) {
+        if (comicsLimit) {
           filter += searchingTitle
-            ? `&limit=${comicslimit}`
-            : `?limit=${comicslimit}`;
+            ? `&limit=${comicsLimit}`
+            : `?limit=${comicsLimit}`;
         }
-        if (skip) {
+        if (skipComic) {
           filter +=
-            searchingTitle || comicslimit ? `&skip=${skip}` : `?skip=${skip}`;
+            searchingTitle || comicsLimit
+              ? `&skip=${skipComic}`
+              : `?skip=${skipComic}`;
         }
 
         const response = await axios.get(
@@ -53,7 +57,7 @@ const Comics = ({
       }
     };
     fetchData();
-  }, [searchingTitle, skip, comicslimit]);
+  }, [searchingTitle, skipComic, comicsLimit]);
 
   const addComicToFavorite = async (comicId) => {
     try {
@@ -196,9 +200,11 @@ const Comics = ({
                 })}
               </div>
               <Pagination
-                skip={skip}
-                setSkip={setSkip}
+                skipComic={skipComic}
+                setSkipComic={setSkipComic}
                 comicsData={comicsData}
+                pageButton={pageButton}
+                setPageButton={setPageButton}
               />
             </div>
           </div>

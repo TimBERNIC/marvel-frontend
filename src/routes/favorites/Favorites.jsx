@@ -115,7 +115,9 @@ const Favorites = ({
                   </p>
 
                   <div className="global-favorite-character-box">
-                    <h3 className="subtitle-favorite">Tes héros Favoris</h3>
+                    {favoritesCharactersDataTab.length && (
+                      <h3 className="subtitle-favorite">Tes héros Favoris</h3>
+                    )}
                     <div className="favorite-characters-box">
                       {favoritesCharactersDataTab.map((character, index) => {
                         return (
@@ -162,7 +164,9 @@ const Favorites = ({
                   </div>
 
                   <div className="global-favorite-comics-box">
-                    <h3 className="subtitle-favorite">Tes Comics Favoris</h3>
+                    {favoritesComicsDataTab.length && (
+                      <h3 className="subtitle-favorite">Tes Comics Favoris</h3>
+                    )}
                     {/* Map des Comics favoris */}
                     <div className="favorite-comics-box">
                       {favoritesComicsDataTab.map((comic, index) => {

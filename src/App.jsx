@@ -20,7 +20,9 @@ const App = () => {
   const [userName, setUserName] = useState("");
   const [searchingName, setSearchingName] = useState("");
   const [searchingTitle, setSearchingTitle] = useState("");
-
+  const [pageButton, setPageButton] = useState(1);
+  const [skipComic, setSkipComic] = useState(0);
+  const [skipCharacters, setSkipCharacters] = useState(0);
   //Récupération des données utilisateur si token présent.
   useEffect(() => {
     const fetchData = async () => {
@@ -64,6 +66,9 @@ const App = () => {
           userName={userName}
           setUserName={setUserName}
           setFavoritesTab={setFavoritesTab}
+          setPageButton={setPageButton}
+          setSkipComic={setSkipComic}
+          setSkipCharacters={setSkipCharacters}
         />
         <Routes>
           <Route path="/" element={<Welcome />}></Route>
@@ -81,6 +86,10 @@ const App = () => {
                 setUserName={setUserName}
                 favoritesTab={favoritesTab}
                 setFavoritesTab={setFavoritesTab}
+                pageButton={pageButton}
+                setPageButton={setPageButton}
+                skipCharacters={skipCharacters}
+                setSkipCharacters={setSkipCharacters}
               />
             }></Route>
           <Route
@@ -97,6 +106,10 @@ const App = () => {
                 setUserName={setUserName}
                 favoritesTab={favoritesTab}
                 setFavoritesTab={setFavoritesTab}
+                pageButton={pageButton}
+                setPageButton={setPageButton}
+                skipComic={skipComic}
+                setSkipComic={setSkipComic}
               />
             }></Route>
           <Route

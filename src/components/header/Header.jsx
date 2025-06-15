@@ -8,6 +8,9 @@ const Header = ({
   searchingTitle,
   setSearchingTitle,
   userName,
+  setPageButton,
+  setSkipComic,
+  setSkipCharacters,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,6 +34,8 @@ const Header = ({
                 type="text"
                 value={searchingName}
                 onChange={(event) => {
+                  setPageButton(1);
+                  setSkipCharacters(0);
                   setSearchingName(event.target.value);
                 }}
                 placeholder="Rechercher un héros"
@@ -41,6 +46,8 @@ const Header = ({
                 type="text"
                 value={searchingTitle}
                 onChange={(event) => {
+                  setPageButton(1);
+                  setSkipComic(0);
                   setSearchingTitle(event.target.value);
                 }}
                 placeholder="Rechercher un comics"

@@ -11,18 +11,20 @@ const Home = ({
   token,
   setToken,
   searchingName,
-  setSearchingName,
   userId,
   setUserId,
   userName,
   setUserName,
   favoritesTab,
   setFavoritesTab,
+  pageButton,
+  setPageButton,
+  skipCharacters,
+  setSkipCharacters,
 }) => {
   const [homeData, setHomeData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [limit, setlimit] = useState(100);
-  const [skip, setSkip] = useState(0);
 
   const navigate = useNavigate();
 
@@ -37,8 +39,11 @@ const Home = ({
         if (limit) {
           filter += searchingName ? `&limit=${limit}` : `?limit=${limit}`;
         }
-        if (skip) {
-          filter += searchingName || limit ? `&skip=${skip}` : `?skip=${skip}`;
+        if (skipCharacters) {
+          filter +=
+            searchingName || limit
+              ? `&skip=${skipCharacters}`
+              : `?skip=${skipCharacters}`;
         }
 
         const response = await axios.get(
@@ -51,7 +56,7 @@ const Home = ({
       }
     };
     fetchData();
-  }, [searchingName, skip, limit]);
+  }, [searchingName, skipCharacters, limit]);
 
   const addCharacterToFavorite = async (characterId) => {
     try {
@@ -184,7 +189,13 @@ const Home = ({
                   );
                 })}
               </div>
-              <Pagination skip={skip} setSkip={setSkip} homeData={homeData} />
+              <Pagination
+                homeData={homeData}
+                pageButton={pageButton}
+                setPageButton={setPageButton}
+                skipCharacters={skipCharacters}
+                setSkipCharacters={setSkipCharacters}
+              />
             </div>
           </div>
         )}

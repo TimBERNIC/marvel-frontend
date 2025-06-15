@@ -2,8 +2,16 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "./Pagination.css";
 
-const Pagination = ({ skip, setSkip, homeData, comicsData }) => {
-  const [pageButton, setPageButton] = useState(1);
+const Pagination = ({
+  skipComic,
+  setSkipComic,
+  homeData,
+  comicsData,
+  pageButton,
+  setPageButton,
+  skipCharacters,
+  setSkipCharacters,
+}) => {
   const location = useLocation();
 
   return (
@@ -15,7 +23,7 @@ const Pagination = ({ skip, setSkip, homeData, comicsData }) => {
               <div
                 className="pagination-button pagination-left-button"
                 onClick={() => {
-                  setSkip(skip - 100);
+                  setSkipCharacters(skipCharacters - 100);
                   setPageButton(pageButton - 1);
                 }}>
                 {"<<"}
@@ -30,7 +38,7 @@ const Pagination = ({ skip, setSkip, homeData, comicsData }) => {
               <div
                 className="pagination-button pagination-rigth-button"
                 onClick={() => {
-                  setSkip(skip + 100);
+                  setSkipCharacters(skipCharacters + 100);
                   setPageButton(pageButton + 1);
                 }}>
                 {">>"}
@@ -47,7 +55,7 @@ const Pagination = ({ skip, setSkip, homeData, comicsData }) => {
               <div
                 className="pagination-button pagination-left-button"
                 onClick={() => {
-                  setSkip(skip - 12);
+                  setSkipComic(skipComic - 12);
                   setPageButton(pageButton - 1);
                 }}>
                 {"<<"}
@@ -62,7 +70,7 @@ const Pagination = ({ skip, setSkip, homeData, comicsData }) => {
               <div
                 className="pagination-button pagination-rigth-button"
                 onClick={() => {
-                  setSkip(skip + 12);
+                  setSkipComic(skipComic + 12);
                   setPageButton(pageButton + 1);
                 }}>
                 {">>"}
@@ -77,7 +85,8 @@ const Pagination = ({ skip, setSkip, homeData, comicsData }) => {
         <div
           className="pagination-button reset-pagination"
           onClick={() => {
-            setSkip(0);
+            setSkipComic(0);
+            setSkipCharacters(0);
             setPageButton(1);
           }}>
           Retour page 1
