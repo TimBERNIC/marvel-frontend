@@ -53,6 +53,10 @@
 .comic-box:hover {
   border: white 2px solid;
   cursor: pointer;
+  transform: scale3d(1.2, 1.2, 1.2) rotate(-5deg);
+  z-index: 0;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .image-comic-box {
   width: 100%;
@@ -144,5 +148,13 @@
     border: solid 3px rgb(166, 1, 1);
     border-radius: 10px;
     box-shadow: 6px 5px 20px 5px rgba(0, 0, 0, 0.39);
+  }
+  .comic-box:hover {
+    border: white 2px solid;
+    cursor: pointer;
+    transform: none;
+    z-index: 0;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    transition: none;
   }
 }

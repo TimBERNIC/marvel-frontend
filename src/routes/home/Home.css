@@ -32,6 +32,10 @@
 .card-box:hover {
   cursor: pointer;
   border: solid 2px rgb(255, 255, 255);
+  z-index: 0;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform: scale3d(1.2, 1.2, 1.2) rotate(-5deg);
 }
 
 .image-card-box {
@@ -52,12 +56,10 @@
 .card-details-box {
   padding: 10px;
   display: flex;
-
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   height: 40%;
-
   background-color: rgba(224, 200, 178, 0.995);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -151,5 +153,10 @@
     border: solid 3px rgb(166, 1, 1);
     border-radius: 10px;
     box-shadow: 6px 5px 20px 5px rgba(0, 0, 0, 0.39);
+  }
+  .card-box:hover {
+    z-index: 0;
+    box-shadow: none;
+    transform: none;
   }
 }

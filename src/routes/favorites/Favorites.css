@@ -69,6 +69,10 @@
 }
 .character-box:hover {
   border: solid 2px rgb(255, 255, 255);
+  transform: scale3d(1.2, 1.2, 1.2);
+  z-index: 1000;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .image-character-box {
   width: 100%;
@@ -197,6 +201,11 @@
     border: solid 3px rgb(166, 1, 1);
     border-radius: 10px;
     box-shadow: 6px 5px 20px 5px rgba(0, 0, 0, 0.39);
+  }
+  .character-box:hover {
+    transform: none;
+    z-index: 0;
+    box-shadow: none;
   }
   .favorite-login-box {
     font-size: 24px;
