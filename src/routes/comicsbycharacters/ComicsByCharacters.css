@@ -10,7 +10,6 @@
   flex-wrap: wrap;
   gap: 20px;
   margin-bottom: 20px;
-  border: solid 2px rgb(0, 9, 179);
 }
 .avatar-box {
   display: flex;
