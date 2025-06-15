@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ComicsByCharacters.css";
 import Navbar from "../../components/navbar/Navbar";
 import Modal from "../../components/modal/Modal";
 import etoileLogo from "../../assets/img/etoileLogo.png";
+import { FaArrowLeft } from "react-icons/fa6";
 
 const ComicsByCharacters = ({
   token,
@@ -17,7 +18,7 @@ const ComicsByCharacters = ({
   const [isLoading, setisLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
   const [tempData, setTempData] = useState("");
-
+  const navigate = useNavigate();
   const {
     comics,
     name,
@@ -97,6 +98,13 @@ const ComicsByCharacters = ({
         <main className="ComicsByCharacters-main">
           <div className="container">
             <div className="avatar-box">
+              <button
+                className="back-button"
+                onClick={() => {
+                  navigate("/home");
+                }}>
+                <FaArrowLeft />
+              </button>
               <h1>{name}</h1>
               <div className="avatar-picture-box">
                 <img

@@ -182,8 +182,7 @@
   }
   .favorite-characters-box,
   .favorite-comics-box {
-    padding: 20px;
-
+    padding: 0 0 0 25%;
     justify-content: flex-start;
     flex-wrap: nowrap;
     margin-top: -20px;

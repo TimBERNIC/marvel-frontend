@@ -49,6 +49,7 @@ const Navbar = ({
               className="characters-button"
               onClick={() => {
                 navigate("/home");
+                setIsBurgerOpen(!isBurgerOpen);
               }}>
               Personnages
             </div>
@@ -56,6 +57,7 @@ const Navbar = ({
               className="comics-button"
               onClick={() => {
                 navigate("/comics");
+                setIsBurgerOpen(!isBurgerOpen);
               }}>
               Comics
             </div>
@@ -63,6 +65,7 @@ const Navbar = ({
               className="favorites-button"
               onClick={() => {
                 navigate("/favorites");
+                setIsBurgerOpen(!isBurgerOpen);
               }}>
               Favoris
             </div>
