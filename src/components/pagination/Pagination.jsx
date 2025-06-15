@@ -85,8 +85,8 @@ const Pagination = ({
         <div
           className="pagination-button reset-pagination"
           onClick={() => {
-            setSkipComic(0);
-            setSkipCharacters(0);
+            skipComic && setSkipComic(0);
+            skipCharacters && setSkipCharacters(0);
             setPageButton(1);
           }}>
           Retour page 1
