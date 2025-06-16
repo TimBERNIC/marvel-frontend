@@ -30,7 +30,7 @@
   text-align: center;
   animation: shine 2s infinite;
   text-shadow: 2px 2px 5px black;
-  font-size: 150px;
+  font-size: 100px;
   color: white;
   animation: shadowMouvBabe 2s infinite;
 }
@@ -46,7 +46,7 @@
 }
 .marvel-title {
   color: white;
-  font-size: 250px;
+  font-size: 175px;
   animation: shine 4s 1;
 }
 @keyframes shine {
